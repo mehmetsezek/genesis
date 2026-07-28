@@ -1,16 +1,18 @@
-# Genesis V2.4 Premium Layered HQ
+# Genesis Command HQ — Interactive Rebuild
 
-A clean layered rebuild of Genesis Command HQ.
+A clean 2.5D SVG headquarters rebuilt as a real interactive scene rather than a wallpaper.
 
-- Premium vector architectural cutaway with no baked-in people, clocks, labels, or metrics
-- Separate animated workers and data cubes
-- Full-width CEO Command Room
-- Creative, Commerce, Finance, Operations, AI Operations and central lift
-- Device-local dawn/day/dusk/night lighting
-- Clickable department workspaces and persistent CEO approval flow
+## Included
+- Full-width CEO command room
+- Six clickable departments
+- Independent animated workers
+- Workers walking between departments
+- Moving lift and data objects
+- Local device time and time-of-day mode
+- Live HUD and department panels
+- No people, clocks, labels or metrics baked into a background image
 
 ## Run
-
 ```bash
 npm install
 npm run dev

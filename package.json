@@ -1,6 +1,6 @@
 {
-  "name": "genesis-command-hq",
-  "version": "0.1.0",
+  "name": "genesis-command-hq-interactive-rebuild",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "motion": "^12.42.1",
     "next": "16.2.11",
     "react": "19.2.7",
     "react-dom": "19.2.7"
