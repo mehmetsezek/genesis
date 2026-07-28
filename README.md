@@ -1,24 +1,17 @@
-# Genesis Command Centre V2.0 — Living HQ
+# Genesis Command HQ — V2.0 Rebuild
 
-This build introduces the first premium headquarters rebuild:
+A visibly redesigned premium headquarters prototype for Genesis.
 
-- Full-width CEO Command Room across the top floor
-- Creative and Commerce on the middle floor
-- Finance, AI Operations and Operations on the ground floor
-- Central animated elevator
-- Local-device dawn/day/dusk/night environment
-- Living skyline, clouds, aircraft and exterior Matrix atmosphere
-- Department-specific interiors and purposeful AI-worker motion
-- Larger cross-department data-cube routes
-- Existing CEO approval workflow and local persistence retained
+## Major changes
+- Full-width CEO Command Room with living local-time skyline
+- New central lift and dedicated AI Operations core
+- Distinct Creative, Commerce, Finance and Operations interiors
+- Upgraded AI worker silhouettes and movement
+- Premium data-cube traffic and richer architectural depth
+- Existing department drill-down and CEO approval workflow preserved
 
-## Run locally
-
+## Run
 ```bash
 npm install
 npm run dev
 ```
-
-## Deploy
-
-Push the complete project folder to GitHub and import it into Vercel. Do not upload this as a partial patch over an incomplete repository.

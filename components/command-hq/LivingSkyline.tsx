@@ -1,19 +1,32 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useEffect, useMemo, useState } from "react";
 
-type DayPhase = "dawn" | "day" | "dusk" | "night";
+function periodFor(hour: number) {
+  if (hour >= 5 && hour < 8) return "dawn";
+  if (hour >= 8 && hour < 17) return "day";
+  if (hour >= 17 && hour < 21) return "dusk";
+  return "night";
+}
 
-export function LivingSkyline({ phase }: { phase: DayPhase }) {
+export function LivingSkyline() {
+  const [hour, setHour] = useState(22);
+
+  useEffect(() => {
+    const update = () => setHour(new Date().getHours());
+    update();
+    const timer = window.setInterval(update, 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const period = useMemo(() => periodFor(hour), [hour]);
   return (
-    <div className={`livingSkyline skyline-${phase}`} aria-hidden="true">
+    <div className={`livingSkyline skyline-${period}`} aria-label={`Local ${period} skyline`}>
       <div className="skyGlow" />
-      <motion.div className="cloud cloudOne" animate={{ x: [0, 90, 0] }} transition={{ duration: 45, repeat: Infinity, ease: "easeInOut" }} />
-      <motion.div className="cloud cloudTwo" animate={{ x: [0, -70, 0] }} transition={{ duration: 58, repeat: Infinity, ease: "easeInOut" }} />
-      <div className="cityLayer cityBack"><i/><i/><i/><i/><i/><i/><i/><i/></div>
-      <div className="cityLayer cityFront"><i/><i/><i/><i/><i/><i/></div>
-      <motion.span className="aircraft" animate={{ x: [0, 540], opacity: [0, 1, 1, 0] }} transition={{ duration: 20, repeat: Infinity, repeatDelay: 18, ease: "linear" }} />
-      <div className="matrixCurtain" />
+      <div className="cityLayer cityBack" />
+      <div className="cityLayer cityFront" />
+      <div className="skylineRain" />
+      <div className="skylineScan" />
     </div>
   );
 }

@@ -23,17 +23,6 @@ export function CommandHQ() {
   const [profit, setProfit] = useState(419);
   const [activityItems, setActivityItems] = useState(initialActivities);
   const [hydrated, setHydrated] = useState(false);
-  const [phase, setPhase] = useState<"dawn" | "day" | "dusk" | "night">("night");
-
-  useEffect(() => {
-    const updatePhase = () => {
-      const hour = new Date().getHours();
-      setPhase(hour >= 5 && hour < 8 ? "dawn" : hour >= 8 && hour < 17 ? "day" : hour >= 17 && hour < 21 ? "dusk" : "night");
-    };
-    updatePhase();
-    const phaseTimer = window.setInterval(updatePhase, 60000);
-    return () => window.clearInterval(phaseTimer);
-  }, []);
 
   useEffect(() => {
     try {
@@ -106,7 +95,7 @@ export function CommandHQ() {
   };
 
   return (
-    <div className={`genesisApp app-${phase}`}>
+    <div className="genesisApp">
       <div className="matrixRain" aria-hidden="true" />
       <div className="digitalFog" aria-hidden="true" />
       <TopMetrics revenue={revenue} profit={profit} />
@@ -116,7 +105,7 @@ export function CommandHQ() {
         activities={activityItems}
         onOpenBriefing={() => setBriefingOpen(true)}
       />
-      <HeadquartersBuilding departments={departments} selected={selected} onSelect={setSelected} phase={phase} />
+      <HeadquartersBuilding departments={departments} selected={selected} onSelect={setSelected} />
       <BottomNavigation />
       <DepartmentDetail department={selectedDepartment} onClose={() => setSelected(undefined)} />
       <CEOBriefing

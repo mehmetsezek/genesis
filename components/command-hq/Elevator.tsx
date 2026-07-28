@@ -4,21 +4,15 @@ import { motion } from "motion/react";
 
 export function Elevator() {
   return (
-    <div className="elevator" aria-label="Central elevator moving between headquarters floors">
-      <div className="elevatorCrown">G</div>
-      <div className="elevatorRail" />
-      <motion.div
-        className="elevatorCar"
-        animate={{ y: [0, 0, 116, 116, 0] }}
-        transition={{ duration: 16, repeat: Infinity, times: [0, .25, .42, .72, 1], ease: "easeInOut" }}
-      >
-        <div className="elevatorDisplay">{phaseLabel()}</div>
-        <div className="elevatorDoors"><i/><i/></div>
-        <span className="elevatorPassenger" />
-      </motion.div>
-      <div className="floorDots"><i/><i/><i/></div>
-    </div>
+    <section className="elevatorTower" aria-label="Central elevator">
+      <header><span>LIFT</span><b>02</b></header>
+      <div className="elevatorShaft">
+        <div className="shaftRails"><i/><i/></div>
+        <motion.div className="elevatorCar" animate={{ y: [8, 128, 8] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", times: [0, .52, 1] }}>
+          <span className="elevatorDoor doorA"/><span className="elevatorDoor doorB"/><b>G</b>
+        </motion.div>
+        <div className="floorMarker marker2">2</div><div className="floorMarker marker1">1</div>
+      </div>
+    </section>
   );
 }
-
-function phaseLabel() { return "01"; }
