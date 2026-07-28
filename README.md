@@ -1,19 +1,16 @@
-# Genesis Command HQ
+# Genesis Command Centre V2.0 — Living HQ
 
-Production-first MVP for the Genesis visual operating system.
+This build introduces the first premium headquarters rebuild:
 
-## Included in this first build
-
-- Three-floor Command HQ
-- Exactly six clickable departments
+- Full-width CEO Command Room across the top floor
+- Creative and Commerce on the middle floor
+- Finance, AI Operations and Operations on the ground floor
 - Central animated elevator
-- Permanent top, left, right and bottom HUD
-- Startup-scale mock metrics
-- Department hover cards
-- Smooth department drill-down views
-- Lightweight AI worker animation
-- Matrix-inspired atmosphere outside the building
-- Responsive laptop behaviour and reduced-motion support
+- Local-device dawn/day/dusk/night environment
+- Living skyline, clouds, aircraft and exterior Matrix atmosphere
+- Department-specific interiors and purposeful AI-worker motion
+- Larger cross-department data-cube routes
+- Existing CEO approval workflow and local persistence retained
 
 ## Run locally
 
@@ -22,41 +19,6 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+## Deploy
 
-## Validate production build
-
-```bash
-npm run build
-npm start
-```
-
-## Next implementation pass
-
-1. Replace CSS room illustrations with final layered SVG artwork.
-2. Add real authentication and PostgreSQL/Supabase schema.
-3. Connect live agents, tasks, approvals and activity events.
-4. Add real-time updates and data-cube workflow animation.
-5. Add department-specific workspaces without changing the HQ shell.
-
-
-## V1.2
-- Persistent CEO approval workflow
-- Commerce room state changes from attention to processing to healthy
-- Activity, alerts, revenue and profit update after approval
-- Approval state is saved in browser local storage
-
-
-## V1.3 — Living HQ
-
-- Workers now use varied typing, screen-review and walking loops.
-- The central elevator pauses at each floor and opens its doors.
-- Glowing data cubes travel between departments.
-- Department screens, room pulses and specialist visual details animate independently.
-- Reduced-motion preferences disable non-essential ambient movement.
-
-## V1.4 — Distinct Departments + Visible Activity
-- Each department now has a unique room layout and furniture language.
-- Worker movement is larger and faster enough to read on iPad.
-- Data cubes are brighter, larger and travel along visible lanes.
-- Department status strips show live work states.
+Push the complete project folder to GitHub and import it into Vercel. Do not upload this as a partial patch over an incomplete repository.

@@ -45,7 +45,7 @@ export const departments: Department[] = [
     id: "ai-operations",
     name: "AI Operations",
     shortName: "AI OPERATIONS",
-    floor: "top",
+    floor: "ground",
     side: "right",
     status: "processing",
     agents: 3,
