@@ -7,19 +7,32 @@ type Props = {
   delay?: number;
 };
 
-const ROUTES = {
+type RoutePath = {
+  x: number[];
+  y: number[];
+  duration: number;
+};
+
+const ROUTES: Record<Props["route"], RoutePath> = {
   "creative-commerce": { x: [0, 118, 255], y: [0, -10, 0], duration: 7.5 },
   "operations-finance": { x: [0, -125, -255], y: [0, 10, 0], duration: 8.5 },
   "ai-commerce": { x: [0, -4, -4], y: [0, 88, 176], duration: 8 },
-} as const;
+};
 
 export function DataCube({ route, delay = 0 }: Props) {
   const path = ROUTES[route];
+
   return (
     <motion.div
       className={`dataCube dataCube-${route}`}
       aria-hidden="true"
-      animate={{ x: path.x, y: path.y, opacity: [0, 1, 1, 0], rotate: [0, 120, 240], scale: [.7, 1.18, 1, .7] }}
+      animate={{
+        x: path.x,
+        y: path.y,
+        opacity: [0, 1, 1, 0],
+        rotate: [0, 120, 240],
+        scale: [0.7, 1.18, 1, 0.7],
+      }}
       transition={{
         duration: path.duration,
         repeat: Infinity,
@@ -29,7 +42,8 @@ export function DataCube({ route, delay = 0 }: Props) {
         times: [0, 0.12, 0.82, 1],
       }}
     >
-      <i /><b />
+      <i />
+      <b />
     </motion.div>
   );
 }
