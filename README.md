@@ -1,3 +1,17 @@
-# Genesis Command HQ V2.2 — Worker Movement Fix
+# Genesis V2.4 Premium Layered HQ
 
-This version removes the duplicate live clock/metric overlay and the full-screen green scan lines from the cinematic build. It adds a separate animated worker layer with visible agents walking inside the CEO, Creative, Commerce, Finance, Operations and lift areas, including workers carrying live data cubes.
+A clean layered rebuild of Genesis Command HQ.
+
+- Premium vector architectural cutaway with no baked-in people, clocks, labels, or metrics
+- Separate animated workers and data cubes
+- Full-width CEO Command Room
+- Creative, Commerce, Finance, Operations, AI Operations and central lift
+- Device-local dawn/day/dusk/night lighting
+- Clickable department workspaces and persistent CEO approval flow
+
+## Run
+
+```bash
+npm install
+npm run dev
+```
