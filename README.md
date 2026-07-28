@@ -38,3 +38,10 @@ npm start
 3. Connect live agents, tasks, approvals and activity events.
 4. Add real-time updates and data-cube workflow animation.
 5. Add department-specific workspaces without changing the HQ shell.
+
+
+## V1.2
+- Persistent CEO approval workflow
+- Commerce room state changes from attention to processing to healthy
+- Activity, alerts, revenue and profit update after approval
+- Approval state is saved in browser local storage

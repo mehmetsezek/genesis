@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { metrics } from "@/data/genesis";
 
-export function TopMetrics() {
+export function TopMetrics({ revenue, profit }: { revenue: number; profit: number }) {
   const [time, setTime] = useState("");
 
   useEffect(() => {
@@ -13,6 +13,13 @@ export function TopMetrics() {
     return () => window.clearInterval(timer);
   }, []);
 
+  const liveMetrics = useMemo(() => metrics.map((metric) => {
+    if (metric.label === "Revenue") return { ...metric, value: `£${revenue}` };
+    if (metric.label === "Profit") return { ...metric, value: `£${profit}` };
+    if (metric.label === "Global Balance") return { ...metric, value: `£${(8041 + profit).toLocaleString("en-GB")}`, trend: `+£${profit} today` };
+    return metric;
+  }), [revenue, profit]);
+
   return (
     <header className="topMetrics" aria-label="Company metrics">
       <div className="brandLockup">
@@ -20,7 +27,7 @@ export function TopMetrics() {
         <div><strong>GENESIS</strong><small>COMMAND HQ</small></div>
       </div>
       <div className="metricRail">
-        {metrics.map((metric) => (
+        {liveMetrics.map((metric) => (
           <button className="metric" key={metric.label} type="button">
             <span>{metric.label}</span><strong>{metric.value}</strong><small>{metric.trend}</small>
           </button>

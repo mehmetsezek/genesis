@@ -1,13 +1,12 @@
 "use client";
 
-import type { DepartmentId } from "@/data/genesis";
-import { departments } from "@/data/genesis";
+import type { Department, DepartmentId } from "@/data/genesis";
 import { DepartmentRoom } from "./DepartmentRoom";
 import { Elevator } from "./Elevator";
 
-type Props = { selected?: DepartmentId; onSelect: (id: DepartmentId) => void };
+type Props = { departments: Department[]; selected?: DepartmentId; onSelect: (id: DepartmentId) => void };
 
-export function HeadquartersBuilding({ selected, onSelect }: Props) {
+export function HeadquartersBuilding({ departments, selected, onSelect }: Props) {
   const room = (floor: string, side: string) => departments.find((d) => d.floor === floor && d.side === side)!;
   return (
     <main className={`hqViewport ${selected ? "hasSelection" : ""}`}>
