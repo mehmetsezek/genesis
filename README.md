@@ -54,3 +54,9 @@ npm start
 - Glowing data cubes travel between departments.
 - Department screens, room pulses and specialist visual details animate independently.
 - Reduced-motion preferences disable non-essential ambient movement.
+
+## V1.4 — Distinct Departments + Visible Activity
+- Each department now has a unique room layout and furniture language.
+- Worker movement is larger and faster enough to read on iPad.
+- Data cubes are brighter, larger and travel along visible lanes.
+- Department status strips show live work states.

@@ -11,12 +11,12 @@ type Props = {
 
 export function AIWorker({ variant, walking = false, label, activity = walking ? "walking" : "typing" }: Props) {
   const movement = walking
-    ? { x: [0, 34, 34, 0], scaleX: [1, 1, -1, -1] }
+    ? { x: [0, 72, 72, 0], scaleX: [1, 1, -1, -1] }
     : activity === "screen"
-      ? { y: [0, -1, 0], rotate: [0, -2, 0, 2, 0] }
+      ? { y: [0, -3, 0], rotate: [0, -4, 0, 4, 0] }
       : activity === "reviewing"
-        ? { y: [0, -2, 0], x: [0, 2, 0] }
-        : { y: [0, -1.5, 0] };
+        ? { y: [0, -3, 0], x: [0, 4, 0] }
+        : { y: [0, -2.5, 0] };
 
   return (
     <motion.button
@@ -25,17 +25,19 @@ export function AIWorker({ variant, walking = false, label, activity = walking ?
       aria-label={label}
       animate={movement}
       transition={{
-        duration: walking ? 11 : 3.5 + variant,
+        duration: walking ? 7.5 : 2.2 + variant * .55,
         repeat: Infinity,
         ease: "easeInOut",
-        delay: variant * 0.7,
-        repeatDelay: walking ? 3 : 0,
+        delay: variant * .55,
+        repeatDelay: walking ? 1.4 : 0,
       }}
-      whileHover={{ scale: 1.12 }}
+      whileHover={{ scale: 1.16 }}
     >
+      <span className="workerShadow" />
       <span className="workerHead" />
       <span className="workerBody" />
       <span className="workerArm" />
+      <span className="workerTablet" />
       <span className="workerRing" />
     </motion.button>
   );
