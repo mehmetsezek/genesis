@@ -3,6 +3,7 @@
 import type { Department, DepartmentId } from "@/data/genesis";
 import { DepartmentRoom } from "./DepartmentRoom";
 import { Elevator } from "./Elevator";
+import { AmbientDataFlow } from "./AmbientDataFlow";
 
 type Props = { departments: Department[]; selected?: DepartmentId; onSelect: (id: DepartmentId) => void };
 
@@ -19,6 +20,7 @@ export function HeadquartersBuilding({ departments, selected, onSelect }: Props)
           </div>
         ))}
         <Elevator />
+        <AmbientDataFlow />
         <div className="buildingCap" />
         <div className="buildingBase" />
       </div>

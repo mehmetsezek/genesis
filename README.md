@@ -45,3 +45,12 @@ npm start
 - Commerce room state changes from attention to processing to healthy
 - Activity, alerts, revenue and profit update after approval
 - Approval state is saved in browser local storage
+
+
+## V1.3 — Living HQ
+
+- Workers now use varied typing, screen-review and walking loops.
+- The central elevator pauses at each floor and opens its doors.
+- Glowing data cubes travel between departments.
+- Department screens, room pulses and specialist visual details animate independently.
+- Reduced-motion preferences disable non-essential ambient movement.
