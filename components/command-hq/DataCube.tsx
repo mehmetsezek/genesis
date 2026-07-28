@@ -7,11 +7,17 @@ type Props = {
   delay?: number;
 };
 
-const ROUTES = {
+type MotionRoute = {
+  x: number[];
+  y: number[];
+  duration: number;
+};
+
+const ROUTES: Record<Props["route"], MotionRoute> = {
   "creative-commerce": { x: [0, 118, 255], y: [0, -10, 0], duration: 7.5 },
   "operations-finance": { x: [0, -125, -255], y: [0, 10, 0], duration: 8.5 },
   "ai-commerce": { x: [0, -4, -4], y: [0, 88, 176], duration: 8 },
-} as const;
+};
 
 export function DataCube({ route, delay = 0 }: Props) {
   const path = ROUTES[route];
