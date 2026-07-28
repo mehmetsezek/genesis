@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { motion } from "motion/react";
 import type { Department, DepartmentId } from "@/data/genesis";
 import { activities as initialActivities, departments as initialDepartments } from "@/data/genesis";
 import { DepartmentDetail } from "./DepartmentDetail";
@@ -18,6 +19,55 @@ const hotspots: Array<{ id: DepartmentId; label: string; className: string }> = 
   { id: "ai-operations", label: "Open AI Operations", className: "hotspot-ai" },
 ];
 
+type WorkerSpec = {
+  id: string;
+  className: string;
+  distance: number;
+  duration: number;
+  delay: number;
+  carry?: boolean;
+  reverse?: boolean;
+};
+
+const workers: WorkerSpec[] = [
+  { id: "ceo-a", className: "sceneWorker-ceo-a", distance: 105, duration: 10, delay: 0 },
+  { id: "ceo-b", className: "sceneWorker-ceo-b", distance: 82, duration: 8.5, delay: 2.2, reverse: true },
+  { id: "creative-a", className: "sceneWorker-creative-a", distance: 125, duration: 8, delay: .5, carry: true },
+  { id: "creative-b", className: "sceneWorker-creative-b", distance: 70, duration: 7, delay: 3.1, reverse: true },
+  { id: "commerce-a", className: "sceneWorker-commerce-a", distance: 110, duration: 8.8, delay: 1.2, carry: true },
+  { id: "commerce-b", className: "sceneWorker-commerce-b", distance: 75, duration: 6.8, delay: 4, reverse: true },
+  { id: "finance-a", className: "sceneWorker-finance-a", distance: 115, duration: 9.2, delay: 2.4 },
+  { id: "operations-a", className: "sceneWorker-operations-a", distance: 118, duration: 7.8, delay: 1.7, carry: true, reverse: true },
+  { id: "lift-a", className: "sceneWorker-lift-a", distance: 0, duration: 5.5, delay: 0 },
+];
+
+function MovingWorker({ spec }: { spec: WorkerSpec }) {
+  const start = spec.reverse ? spec.distance : 0;
+  const end = spec.reverse ? 0 : spec.distance;
+  const isLift = spec.className.includes("lift");
+
+  return (
+    <motion.div
+      className={`sceneWorker ${spec.className}`}
+      aria-hidden="true"
+      animate={isLift
+        ? { y: [0, -96, -96, 0], opacity: [1, 1, .82, 1] }
+        : { x: [start, end, end, start], scaleX: spec.reverse ? [-1, -1, 1, 1] : [1, 1, -1, -1] }}
+      transition={{ duration: spec.duration, repeat: Infinity, ease: "easeInOut", delay: spec.delay, times: [0, .44, .56, 1] }}
+    >
+      <span className="sceneWorker-shadow" />
+      <span className="sceneWorker-head" />
+      <span className="sceneWorker-hair" />
+      <span className="sceneWorker-body" />
+      <span className="sceneWorker-arm sceneWorker-arm-a" />
+      <span className="sceneWorker-arm sceneWorker-arm-b" />
+      <span className="sceneWorker-leg sceneWorker-leg-a" />
+      <span className="sceneWorker-leg sceneWorker-leg-b" />
+      {spec.carry && <span className="sceneWorker-cube" />}
+    </motion.div>
+  );
+}
+
 export function CommandHQ() {
   const [selected, setSelected] = useState<DepartmentId | undefined>();
   const [briefingOpen, setBriefingOpen] = useState(false);
@@ -28,7 +78,7 @@ export function CommandHQ() {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    const id = window.setInterval(() => setTime(new Date()), 1000);
+    const id = window.setInterval(() => setTime(new Date()), 60000);
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY);
       if (saved) {
@@ -56,8 +106,6 @@ export function CommandHQ() {
   const selectedDepartment = departments.find((item) => item.id === selected);
   const hour = time.getHours();
   const phase = hour < 6 ? "night" : hour < 9 ? "dawn" : hour < 17 ? "day" : hour < 20 ? "dusk" : "night";
-  const localTime = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" }).format(time);
-  const localDate = new Intl.DateTimeFormat("en-GB", { weekday: "short", day: "2-digit", month: "short" }).format(time);
 
   const approveListing = () => {
     if (approvalState !== "pending") return;
@@ -76,24 +124,23 @@ export function CommandHQ() {
       <div className="sceneViewport">
         <img className="masterScene" src="/genesis-hq-master.png" alt="Genesis premium command centre" />
         <div className="timeTint" aria-hidden="true" />
-        <div className="sceneScan" aria-hidden="true" />
-        <div className="liveBadge"><span /> LIVE HEADQUARTERS</div>
+
         <button className="briefingPill" onClick={() => setBriefingOpen(true)}>
           {approvalState === "pending" ? "1 CEO DECISION" : approvalState === "publishing" ? "PUBLISHING…" : "BRIEFING READY"}
         </button>
-        <div className="localClock"><strong>{localTime}</strong><span>{localDate} · LOCAL TIME</span></div>
-        <div className="startupMetrics">
-          <div><span>REVENUE</span><strong>£{revenue}</strong><em>+8.2% today</em></div>
-          <div><span>PROFIT</span><strong>£{profit}</strong><em>+6.4% today</em></div>
-          <div><span>AI AGENTS</span><strong>12</strong><em>online</em></div>
-          <div><span>AUTOMATIONS</span><strong>9</strong><em>healthy</em></div>
+
+        <div className="workerLayer" aria-hidden="true">
+          {workers.map((worker) => <MovingWorker key={worker.id} spec={worker} />)}
         </div>
+
         {hotspots.map((hotspot) => (
           <button key={hotspot.id} className={`roomHotspot ${hotspot.className}`} aria-label={hotspot.label} onClick={() => setSelected(hotspot.id)}>
             <span>{hotspot.label.replace("Open ", "")}</span>
           </button>
         ))}
-        <div className="cube cubeOne" /><div className="cube cubeTwo" /><div className="cube cubeThree" />
+
+        <div className="cube cubeOne" />
+        <div className="cube cubeTwo" />
       </div>
       <div className="mobileNotice">Rotate your device to landscape for the full Genesis Command Centre.</div>
       <DepartmentDetail department={selectedDepartment} onClose={() => setSelected(undefined)} />
